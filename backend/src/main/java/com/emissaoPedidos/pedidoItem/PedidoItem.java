@@ -1,25 +1,31 @@
-package com.emissaoPedidos.pedido;
+package com.emissaoPedidos.pedidoItem;
 
-import com.emissaoPedidos.cliente.Cliente;
+import com.emissaoPedidos.pedido.Pedido;
 import com.emissaoPedidos.produto.Produto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table
-public class Pedido {
+public class PedidoItem {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    private Cliente cliente;
+    private Pedido pedido;
+
+    @ManyToOne
+    private Produto produto;
+
+    private Integer quantidade;
+
+    private Float precoUnitario;
 }
