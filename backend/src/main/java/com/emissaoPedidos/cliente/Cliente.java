@@ -13,13 +13,11 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="cliente")
+@Table
 public class Cliente {
 
     @Id
-    @Column(name="idCliente")
     private Integer id;
 
-    @Column(name="nomeCliente")
     private String nome;
 }

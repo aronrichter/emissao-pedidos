@@ -13,19 +13,15 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="produto")
+@Table
 public class Produto {
 
     @Id
-    @Column(name="id")
     private Integer id;
 
-    @Column(name="nome")
     private String nome;
 
-    @Column(name="preco")
     private Float preco;
 
-    @Column(name="multiplo")
     private Integer multiplo;
 }
