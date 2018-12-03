@@ -4,6 +4,7 @@ CREATE TABLE pedido_item(
     produto_id     INTEGER(10),
     quantidade     INTEGER(10),
     preco_unitario FLOAT(12,2),
+    rentabilidade  VARCHAR(1),
     PRIMARY KEY (id)
 );
 

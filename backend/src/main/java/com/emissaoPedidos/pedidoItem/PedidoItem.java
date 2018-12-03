@@ -28,4 +28,6 @@ public class PedidoItem {
     private Integer quantidade;
 
     private Float precoUnitario;
+
+    private String rentabilidade;
 }
