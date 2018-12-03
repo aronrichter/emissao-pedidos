@@ -29,5 +29,5 @@ public class PedidoItem {
 
     private Float precoUnitario;
 
-    private String rentabilidade;
+    private Character rentabilidade;
 }

@@ -13,8 +13,23 @@ public class PedidoItemEventHandler {
         this.pedidoItemRepository = pedidoItemRepository;
     }
 
-    @HandleBeforeSave
-    public void regraQuantidade(PedidoItem pedidoItem) {
+    @HandleBeforeCreate
+    public void regraQuantidadeInsercao(PedidoItem pedidoItem) {
         PedidoItemService.verificaQuantidade(pedidoItem);
+    }
+
+    @HandleBeforeSave
+    public void regraQuantidadeAtualizacao(PedidoItem pedidoItem) {
+        PedidoItemService.verificaQuantidade(pedidoItem);
+    }
+
+    @HandleBeforeCreate
+    public void regraRentabilidadeInsercao(PedidoItem pedidoItem) {
+        PedidoItemService.aplicaRentabilidade(pedidoItem);
+    }
+
+    @HandleBeforeSave
+    public void regraRentabilidadeAtualizacao(PedidoItem pedidoItem) {
+        PedidoItemService.aplicaRentabilidade(pedidoItem);
     }
 }
