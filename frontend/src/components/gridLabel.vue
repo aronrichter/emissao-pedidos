@@ -1,17 +1,8 @@
 <template>
   <div class="columns">
-    <div class="column">
-        Produto
-    </div>
-    <div class="column">
-        Valor
-    </div>
-    <div class="column is-2">
-        Quantidade
-    </div>
-    <div class="column is-1">
-        
-    </div>
+    <div class="column is-3">Produto:</div>
+    <div class="column is-4">Valor:</div>
+    <div class="column is-2">Quantidade:</div>
   </div>
 </template>
 
@@ -22,6 +13,9 @@ export default {
 </script>
 
 <style>
-
+.columns{
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 </style>
 
