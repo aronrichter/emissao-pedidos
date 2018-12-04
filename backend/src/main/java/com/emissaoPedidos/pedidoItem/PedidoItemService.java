@@ -1,6 +1,22 @@
 package com.emissaoPedidos.pedidoItem;
 
-public class PedidoItemService {
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequestMapping("/pedidosItem")
+public class PedidoItemServiceImpl {
+
+    PedidoItemRepository pedidoItemRepository;
+
+    public PedidoItemServiceImpl(PedidoItemRepository pedidoItemRepository){
+        this.pedidoItemRepository = pedidoItemRepository;
+    }
 
     public static void verificaQuantidade(PedidoItem pedidoItem) {
         if (pedidoItem.getProduto().getMultiplo() != null) {
@@ -32,4 +48,8 @@ public class PedidoItemService {
         return Math.round((1 - precoCompra / precoOriginal) * 100);
     }
 
+    @GetMapping("pedidoId/{pedidoId}")
+    public List<PedidoItem> getPedidosItem(@PathVariable Integer pedidoId) {
+        return pedidoItemRepository.findByPedidoId(pedidoId);
+    }
 }
