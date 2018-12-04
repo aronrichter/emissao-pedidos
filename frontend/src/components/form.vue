@@ -7,7 +7,7 @@
       </option>
     </select>
     <div class="is-pulled-right">
-      <button>Incluir</button>
+      <button @click="teste">Incluir</button>
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
   data() {
     return {
       nomes: [],
+    }
+  },
+  methods:{
+    teste() {
+      console.log(this.$id);
     }
   },
   created() {
