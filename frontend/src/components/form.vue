@@ -2,13 +2,10 @@
   <div class="tamanhoPagina ">
     <p>Cliente</p>
     <select>
-      <option v-for="(value) in this.nomes" :key="(value._links.self.href).slice(-1)">
+      <option v-for="(value) in this.nomes" :value="(value._links.self.href).slice(-1)">
         {{ value.nome }}
       </option>
     </select>
-    <div class="is-pulled-right">
-      <button @click="teste">Incluir</button>
-    </div>
   </div>
 </template>
 
@@ -17,11 +14,6 @@ export default {
   data() {
     return {
       nomes: [],
-    }
-  },
-  methods:{
-    teste() {
-      console.log(this.$id);
     }
   },
   created() {
