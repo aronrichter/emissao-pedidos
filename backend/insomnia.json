@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-12-01T22:48:49.923Z",
+	"__export_date": "2018-12-06T17:46:18.582Z",
 	"__export_source": "insomnia.desktop.app:v6.2.3",
 	"resources": [
 		{
@@ -87,7 +87,7 @@
 			},
 			"isPrivate": false,
 			"metaSortKey": 1543698777922,
-			"modified": 1543698863430,
+			"modified": 1543925289301,
 			"name": "emissaoPedido",
 			"parentId": "env_53fe1780bab34c85b05b99f5eb2884dc",
 			"_type": "environment"
@@ -148,7 +148,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543698877687,
 			"method": "GET",
-			"modified": 1543700434625,
+			"modified": 1544012821478,
 			"name": "cliente",
 			"parameters": [],
 			"parentId": "fld_39aa63368f93411caad7b8d79939622a",
@@ -171,7 +171,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543698877637,
 			"method": "GET",
-			"modified": 1543699364229,
+			"modified": 1544012824561,
 			"name": "clientes",
 			"parameters": [],
 			"parentId": "fld_39aa63368f93411caad7b8d79939622a",
@@ -194,7 +194,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543698877687,
 			"method": "GET",
-			"modified": 1543704043717,
+			"modified": 1543925726208,
 			"name": "read",
 			"parameters": [],
 			"parentId": "fld_d573a4dfe416481b946c149bff00e7a9",
@@ -212,7 +212,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"pedido\": \"pedido/1\",\n\t\"produto\": \"produto/1\",\n\t\"quantidade\": 1,\n\t\"precoUnitario\": 550000.00\n}"
+				"text": "{\n\t\"pedido\": \"pedido/1\",\n\t\"produto\": \"produto/4\",\n\t\"quantidade\": 1,\n\t\"precoUnitario\": 60000.00\n}"
 			},
 			"created": 1543699393659,
 			"description": "",
@@ -226,7 +226,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543698877737,
 			"method": "POST",
-			"modified": 1543704180831,
+			"modified": 1544002942223,
 			"name": "create",
 			"parameters": [],
 			"parentId": "fld_d573a4dfe416481b946c149bff00e7a9",
@@ -258,7 +258,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543698877587,
 			"method": "PATCH",
-			"modified": 1543704128003,
+			"modified": 1543925840787,
 			"name": "update",
 			"parameters": [],
 			"parentId": "fld_d573a4dfe416481b946c149bff00e7a9",
@@ -281,7 +281,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1534398414564,
 			"method": "DELETE",
-			"modified": 1543700205209,
+			"modified": 1543855554523,
 			"name": "delete",
 			"parameters": [],
 			"parentId": "fld_d573a4dfe416481b946c149bff00e7a9",
@@ -291,7 +291,30 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ url_base  }}pedidoItens/1",
+			"url": "{{ url_base  }}pedidoItens/3",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e8e4d3e37a3145a59ded09123a49f77e",
+			"authentication": {},
+			"body": {},
+			"created": 1543924707778,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1543698877662,
+			"method": "GET",
+			"modified": 1544118334478,
+			"name": "read (Copy)",
+			"parameters": [],
+			"parentId": "fld_d573a4dfe416481b946c149bff00e7a9",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ url_base  }}pedidosItem/pedidoId/1",
 			"_type": "request"
 		},
 		{
@@ -299,7 +322,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"cliente\":{\n\t\t\"id\": 1\n\t}\n}"
+				"text": "{\n\t\"pedido\": {\n\t\t\"cliente\": {\"id\":1}\n\t}\n}"
 			},
 			"created": 1543700284730,
 			"description": "",
@@ -313,7 +336,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543700284730,
 			"method": "POST",
-			"modified": 1543704509524,
+			"modified": 1544093032344,
 			"name": "create",
 			"parameters": [],
 			"parentId": "fld_e3529575ac90495ca51410532f922555",
@@ -323,7 +346,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ url_base  }}pedidos",
+			"url": "https://emissaopedido.herokuapp.com/pedidos",
 			"_type": "request"
 		},
 		{
@@ -345,7 +368,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1543699581233.5,
 			"method": "GET",
-			"modified": 1543704510589,
+			"modified": 1544118305719,
 			"name": "read",
 			"parameters": [],
 			"parentId": "fld_e3529575ac90495ca51410532f922555",
@@ -355,7 +378,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ url_base  }}pedidos/1",
+			"url": "https://emissaopedido.herokuapp.com/pedidos/1",
 			"_type": "request"
 		}
 	]
