@@ -1,7 +1,7 @@
 <template>
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
-    
+
     <div class="tamanhoPagina ">
     <p>Cliente</p>
     <select v-model="name" name="name">
@@ -17,6 +17,7 @@
       <modal v-show="isModalVisible"
              @close="closeModal"
              :idPedido="this.numeroPedido"/>
+    <grid :itensPedido="this.itensPedido"></grid>
   </div>
 </template>
 
@@ -41,17 +42,22 @@ export default {
       name: null,
       nomes: [],
       numeroPedido: null,
+      itensPedido: [],
     };
   },
   created() {
     let promise = this.$http.get('http://localhost:9010/clientes')
       .then(res => res.json())
       .then(data => this.nomes = data._embedded.clientes);
+
+    promise = this.$http.get(`http://localhost:9010/pedidosItem/pedidoId/${this.id}`)
+      .then(res => (res.json())
+      .then(data => this.itensPedido = data))
   },
   methods: {
     incluirPedido() {
       console.log(this.id);
-      /*  
+      /*
       let queryJson = this.montaJson();
       let requisicao = this.$http.post('http://localhost:9010/pedidos', queryJson)
         .then((response) =>{

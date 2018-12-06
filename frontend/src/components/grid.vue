@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bordaTabela">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr class="bordaTabela" v-for="item in itensPedido">
+          <td>{{ item.id }}</td>
+          <td>{{ item.produto.nome }}</td>
+          <td>{{ item.precoUnitario }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>{{ item.rentabilidade }}</td>
         </tr>
       </tbody>
     </table>
@@ -25,9 +25,11 @@
 
 <script>
 export default {
+  props: {
+      itensPedido: {}
+    },
   data() {
     return {
-      produtos: [],
     }
   },
   /*
