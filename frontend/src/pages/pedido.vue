@@ -2,22 +2,18 @@
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
 
-    <div class="tamanhoPagina ">
-    <p>Cliente</p>
-    <select v-model="name" name="name">
-      <option v-for="(value) in this.nomes" :value="(value._links.self.href).slice(-1)">
-        {{ value.nome }}
-      </option>
-    </select>
-  </div>
+    <div class="tamanhoPagina">
+      <p>Cliente</p>
+      <input class="input is-dark" v-model="this.itensPedido[0].pedido.cliente.nome" readonly>
+    </div><br>
 
     <div class="tamanhoPagina is-pulled-right">
-      <button @click="incluirPedido">Incluir</button>
-    </div>
-      <modal v-show="isModalVisible"
-             @close="closeModal"
-             :idPedido="this.numeroPedido"/>
+      <button class="button is-dark is-small" @click="incluirPedido">Adicionar Itens</button>
+    </div><br><br>
+
     <grid :itensPedido="this.itensPedido"></grid>
+
+    <modal v-show="isModalVisible" @close="closeModal" :idPedido="this.itensPedido[0].pedido.id"/>
   </div>
 </template>
 
@@ -43,39 +39,21 @@ export default {
       nomes: [],
       numeroPedido: null,
       itensPedido: [],
+      cliente: ''
     };
   },
   created() {
-    let promise = this.$http.get('https://emissaopedido.herokuapp.com/clientes')
-      .then(res => res.json())
-      .then(data => this.nomes = data._embedded.clientes);
-
-    promise = this.$http.get(`http://localhost:9010/pedidosItem/pedidoId/${this.id}`)
+    let promise = this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
       .then(res => (res.json())
-      .then(data => this.itensPedido = data))
+      .then(data => this.itensPedido = data));
   },
   methods: {
     incluirPedido() {
-      console.log(this.id);
-      /*
-      let queryJson = this.montaJson();
-      let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidos', queryJson)
-        .then((response) =>{
-            this.numeroPedido = Number((response.body._links.pedido.href).slice(-2));
-        });
       this.isModalVisible = true;
-      */
     },
     closeModal() {
       this.isModalVisible = false;
     },
-    montaJson() {
-      return `{
-        "pedido": {
-          "cliente": {"id":${this.name}}
-        }
-      }`;
-    }
   }
 }
 </script>

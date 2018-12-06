@@ -2,21 +2,22 @@
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
     
-    <div class="tamanhoPagina ">
-    <p>Cliente</p>
-    <select v-model="name" name="name">
-      <option v-for="(value) in this.nomes" :value="(value._links.self.href).slice(-1)">
-        {{ value.nome }}
-      </option>
-    </select>
-  </div>
+    <div class="tamanhoPagina">
+      <p>Cliente</p>
+      <div class="control ">
+        <div class="select is-dark is-fullwidth">
+          <select class="" v-model="name" name="name">
+            <option v-for="value in this.nomes" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+          </select>
+        </div>
+      </div>
+    </div><br>
 
     <div class="tamanhoPagina is-pulled-right">
-      <button @click="incluirPedido">Incluir</button>
-    </div>
-      <modal v-show="isModalVisible"
-             @close="closeModal"
-             :idPedido="this.numeroPedido"/>
+      <button class="button is-dark is-small" @click="incluirPedido">Incluir</button>
+    </div><br><br>
+      
+    <modal v-show="isModalVisible" @close="closeModal" :idPedido="this.numeroPedido"/>
   </div>
 </template>
 
@@ -49,7 +50,7 @@ export default {
       let queryJson = this.montaJson();
       let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidos', queryJson)
         .then((response) =>{
-            this.numeroPedido = Number((response.body._links.pedido.href).slice(-2));
+            this.numeroPedido = Number(/[^/]*$/.exec(response.body._links.pedido.href)[0]);
         });
       this.isModalVisible = true;
     },
@@ -57,10 +58,9 @@ export default {
       this.isModalVisible = false;
     },
     montaJson() {
+      console.log(this.name);
       return `{
-        "pedido": {
-          "cliente": {"id":${this.name}}
-        }
+        "cliente":"cliente/${this.name}"
       }`;
     }
   }

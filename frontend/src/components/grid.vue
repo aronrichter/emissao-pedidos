@@ -3,7 +3,6 @@
     <table width="100%">
       <thead>
         <tr class="bordaTabela">
-          <th width="10%">ID</th>
           <th width="25%">Produto</th>
           <th width="25%">Preço</th>
           <th width="10%">Quantidade</th>
@@ -11,12 +10,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bordaTabela" v-for="item in itensPedido">
-          <td>{{ item.id }}</td>
+        <tr class="bordaTabela" v-for="item in itensPedido" @click="teste">
           <td>{{ item.produto.nome }}</td>
-          <td>{{ item.precoUnitario }}</td>
+          <td>R$ {{ item.precoUnitario }}</td>
           <td>{{ item.quantidade }}</td>
-          <td>{{ item.rentabilidade }}</td>
+          <td v-if="item.rentabilidade === 'R'">Ruim</td>
+          <td v-if="item.rentabilidade === 'B'">Boa</td>
+          <td v-if="item.rentabilidade === 'O'">Ótima</td>
         </tr>
       </tbody>
     </table>
@@ -32,13 +32,11 @@ export default {
     return {
     }
   },
-  /*
-  created() {
-    let promise = this.$http.get('http://localhost:9010/produtos')
-      .then(res => res.json())
-      .then(data => this.produtos = data._embedded.produtos);
+  methods: {
+    teste(){
+      console.log("teste");
+    }
   }
-  */
 }
 </script>
 

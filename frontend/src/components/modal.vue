@@ -6,7 +6,7 @@
       <div class="is-grouped teste">
         <label>Produto</label>
         <select v-model="name" name="name">
-          <option v-for="(value) in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+          <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
         </select>
       </div>
       <div class="is-grouped">
@@ -59,7 +59,7 @@
         let queryJson = this.montaJson();
         let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidoItens', queryJson)
           .then(() => {
-            window.location.href = `https://emissaopedido.herokuapp.com/${this.idPedido}`;
+            window.location.href = `http://localhost:8080/pedido/${this.idPedido}`;
           })
           .catch(error => {
             if (error.status == 400) {
@@ -69,7 +69,7 @@
       },
       montaJson() {
         return `{
-          "pedido": "pedido/1", 
+          "pedido": "pedido/${this.idPedido}", 
           "produto": "produto/${this.name}",
           "quantidade": ${this.quantidade},
           "precoUnitario": ${this.preco}
