@@ -57,9 +57,9 @@
       },
       incluirPedido() {
         let queryJson = this.montaJson();
-        let requisicao = this.$http.post('http://localhost:9010/pedidoItens', queryJson)
+        let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidoItens', queryJson)
           .then(() => {
-            window.location.href = `http://localhost:8080/pedido/${this.idPedido}`;
+            window.location.href = `https://emissaopedido.herokuapp.com/${this.idPedido}`;
           })
           .catch(error => {
             if (error.status == 400) {
@@ -77,7 +77,7 @@
       }
     },
     created() {
-    let promise = this.$http.get('http://localhost:9010/produtos')
+    let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
       .then(res => res.json())
       .then(data => this.produtos = data._embedded.produtos);
     },
