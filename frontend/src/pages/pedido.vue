@@ -46,7 +46,7 @@ export default {
     };
   },
   created() {
-    let promise = this.$http.get('http://localhost:9010/clientes')
+    let promise = this.$http.get('https://emissaopedido.herokuapp.com/clientes')
       .then(res => res.json())
       .then(data => this.nomes = data._embedded.clientes);
 
@@ -59,7 +59,7 @@ export default {
       console.log(this.id);
       /*
       let queryJson = this.montaJson();
-      let requisicao = this.$http.post('http://localhost:9010/pedidos', queryJson)
+      let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidos', queryJson)
         .then((response) =>{
             this.numeroPedido = Number((response.body._links.pedido.href).slice(-2));
         });
