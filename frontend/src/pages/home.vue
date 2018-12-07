@@ -47,6 +47,10 @@ export default {
   },
   methods: {
     incluirPedido() {
+      if (!this.name) {
+        alert("Favor escolher cliente");
+        return;
+      }
       let queryJson = this.montaJson();
       let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidos', queryJson)
         .then((response) =>{

@@ -1,27 +1,39 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <h1>Dados do pedido</h1>
-      <br>
-      <div class="is-grouped teste">
-        <label>Produto</label>
-        <select v-model="name" name="name">
-          <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
-        </select>
+      <p>Insira os dados dao pedido:</p><br>
+      <div class="field is-horizontal">
+        <div class="field-label is-small">
+          <label>Produto</label>
+        </div>
+        <div class="control ">
+          <div class="select is-dark is-small">
+            <select v-model="name" name="name">
+              <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="is-grouped">
-        <label>Preço</label>
-        <input v-model="preco" type="number" placeholder="Preço R$" min=0>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-small">
+          <label>Preço</label>
+        </div>
+        <input class="input is-dark is-small" v-model="preco" type="number" placeholder="Preço R$" min=0>
       </div>
-      <div class="is-grouped">
-        <label>Quantidade</label>
-        <input v-model="quantidade" type="number" placeholder="Quantidade">
-      </div>
-      <br>
-      <div class="is-grouped">
-        <button class="button is-success is-danger is-small" @click="cancelar">Cancelar</button>
-        <button class="button is-success is-small" @click="confirmar">Confirmar</button>
-      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-small">
+          <label>Quantidade</label>
+        </div>
+        <input class="input is-dark is-small" v-model="quantidade" type="number" placeholder="Quantidade">
+        </div>
+        <br>
+        <div class="is-grouped">
+          <button class="button is-success is-danger is-small" @click="cancelar">Cancelar</button>
+          <button class="button is-success is-small" @click="confirmar">Confirmar</button>
+        </div>
+
     </div>
   </div>
 </template>
@@ -121,12 +133,8 @@
   .modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
+    margin: 250px 400px 250px 400px;
     overflow-x: auto;
     display: flex;
-  }
-
-  .modal-body {
-    position: relative;
-    padding: 20px 10px;
   }
 </style>
