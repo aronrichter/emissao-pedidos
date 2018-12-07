@@ -28,12 +28,9 @@
 
 <script>
   export default {
-    name: 'modal',
     props: {
       idPedido: { type: Number },
-      idProduto: { type: Number },
-      precoProduto: { type: Number },
-      quantidadeProduto: { type: Number },
+      idPedidoItem: { type: Number },
     },
     data() {
       return {
@@ -51,20 +48,25 @@
       confirmar() {
         if (!this.name) {
           alert("Selecione um produto");
+          return;
         }
         if (this.quantidade <= 0) {
           alert("Valor tem de ser maior que zero!");
           return;
         }
-        //valida preço
-        this.alterarPedido();
+        //validação numero
+        if (this.idPedidoItem){
+          this.alterarPedido();
+        }else {
+          this.incluirPedido();
+        }
       },
 
       alterarPedido(){
          let queryJson = this.montaJson();
-         let requisicao = this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedido}`, queryJson)
+         let requisicao = this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedidoItem}`, queryJson)
           .then(() => {
-            window.location.href = `http://localhost:8080/pedido/${this.id}`;
+            window.location.reload();
           })
           .catch(error => {
             if (error.status == 400) {
@@ -88,7 +90,7 @@
 
       montaJson() {
         return `{
-          "pedido": "pedido/${this.idPedido}", 
+          "pedido": "pedido/${this.idPedido}",
           "produto": "produto/${this.name}",
           "quantidade": ${this.quantidade},
           "precoUnitario": ${this.preco}
@@ -99,16 +101,6 @@
       let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
         .then(res => res.json())
         .then(data => this.produtos = data._embedded.produtos);
-
-      if (this.idProduto){
-        this.name = this.idProduto;
-      }
-      if (this.precoProduto){
-        this.preco = this.precoProduto;
-      }
-      if (this.quantidadeProduto){
-        this.quantidade = this.quantidadeProduto;
-      }
     },
   };
 </script>

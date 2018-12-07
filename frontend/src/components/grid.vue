@@ -1,18 +1,21 @@
 <template>
   <div class="tamanhoPagina">
+    <div class="is-pulled-right">
+      <button class="button is-dark is-small" @click="adicionarItem">Adicionar Itens</button>
+    </div><br><br>
     <table width="100%">
       <thead>
         <tr class="bordaTabela">
-          <th width="25%">Produto</th>
-          <th width="25%">Preço</th>
+          <th width="30%">Produto</th>
+          <th width="20%">Preço</th>
           <th width="10%">Quantidade</th>
           <th width="20%">Rentabilidade</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="bordaTabela" 
-            v-for="item in itensPedido" 
-            @click="incluirPedido(item.id, item.produto.id, item.precoUnitario, item.quantidade)">
+        <tr class="bordaTabela"
+            v-for="item in itensPedido"
+            @click="alterarPedido(item.id)">
           <td>{{ item.produto.nome }}</td>
           <td>R$ {{ item.precoUnitario }}</td>
           <td>{{ item.quantidade }}</td>
@@ -21,14 +24,15 @@
           <td v-if="item.rentabilidade === 'O'">Ótima</td>
         </tr>
       </tbody>
-    </table>
-    <modal v-show="isModalVisible" 
-           @close="closeModal" 
-           :idPedido="this.idPedidoItem"
-           :idProduto="this.idProdutoItem"
-           :precoProduto="this.precoProdutoItem"
-           :quantidadeProduto="this.quantidadeProdutoItem"
-           />
+    </table><br>
+    <div class="is-pulled-right">
+      <button class="button is-dark is-small" @click="adicionarPedido">Adicionar Novo Pedido</button>
+    </div>
+    <modal v-show="isModalVisible"
+          @close="closeModal"
+          :idPedido="idPedidoGrid"
+          :idPedidoItem="idPedidoItemGrid"
+    />
   </div>
 </template>
 
@@ -45,23 +49,25 @@ export default {
   data() {
     return {
       isModalVisible: false,
-      idProdutoItem: null,
-      precoProdutoItem: null,
-      quantidadeProdutoItem: null,
-      idPedidoItem: null,
+      idPedidoGrid: Number(/[^/]*$/.exec(window.location.href)[0]),
+      idPedidoItemGrid: null,
     }
   },
   methods: {
-    incluirPedido(itemPedido, idProduto, preco, qtd) {
-      this.idPedidoItem = itemPedido;
-      this.idProdutoItem = idProduto;
-      this.precoProdutoItem = preco;
-      this.quantidadeProdutoItem = qtd;
+    adicionarItem() {
+      this.idPedidoItemGrid = null;
+      this.isModalVisible = true;
+    },
+    alterarPedido(id) {
+      this.idPedidoItemGrid = id;
       this.isModalVisible = true;
     },
     closeModal() {
       this.isModalVisible = false;
     },
+    adicionarPedido() {
+      window.location.href = `http://localhost:8080/`;
+    }
   }
 }
 </script>

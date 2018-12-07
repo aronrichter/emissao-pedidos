@@ -7,10 +7,6 @@
       <input class="input is-dark" v-model="this.itensPedido[0].pedido.cliente.nome" readonly>
     </div><br>
 
-    <div class="tamanhoPagina is-pulled-right">
-      <button class="button is-dark is-small" @click="incluirPedido">Adicionar Itens</button>
-    </div><br><br>
-
     <grid :itensPedido="this.itensPedido"></grid>
 
   </div>

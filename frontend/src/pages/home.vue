@@ -1,7 +1,7 @@
 <template>
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
-    
+
     <div class="tamanhoPagina">
       <p>Cliente</p>
       <div class="control ">
@@ -16,7 +16,7 @@
     <div class="tamanhoPagina is-pulled-right">
       <button class="button is-dark is-small" @click="incluirPedido">Incluir</button>
     </div><br><br>
-      
+
     <modal v-show="isModalVisible" @close="closeModal" :idPedido="this.numeroPedido"/>
   </div>
 </template>
@@ -58,7 +58,6 @@ export default {
       this.isModalVisible = false;
     },
     montaJson() {
-      console.log(this.name);
       return `{
         "cliente":"cliente/${this.name}"
       }`;
