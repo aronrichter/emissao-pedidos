@@ -13,14 +13,12 @@
 
     <grid :itensPedido="this.itensPedido"></grid>
 
-    <modal v-show="isModalVisible" @close="closeModal" :idPedido="this.itensPedido[0].pedido.id"/>
   </div>
 </template>
 
 <script>
 import toolbar from '../components/toolbar.vue';
 import grid from '../components/grid.vue';
-import modal from '../components/modal.vue';
 
 export default {
   props: {
@@ -30,11 +28,9 @@ export default {
   components: {
     'toolbar': toolbar,
     'grid': grid,
-    'modal': modal,
   },
   data() {
     return {
-      isModalVisible: false,
       name: null,
       nomes: [],
       numeroPedido: null,
@@ -46,15 +42,8 @@ export default {
     let promise = this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
       .then(res => (res.json())
       .then(data => this.itensPedido = data));
+      console.log(this.itensPedido);
   },
-  methods: {
-    incluirPedido() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
-  }
 }
 </script>
 

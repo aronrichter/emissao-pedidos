@@ -30,7 +30,10 @@
   export default {
     name: 'modal',
     props: {
-      idPedido: { type: Number }
+      idPedido: { type: Number },
+      idProduto: { type: Number },
+      precoProduto: { type: Number },
+      quantidadeProduto: { type: Number },
     },
     data() {
       return {
@@ -44,6 +47,7 @@
       cancelar() {
         this.$emit('close');
       },
+
       confirmar() {
         if (!this.name) {
           alert("Selecione um produto");
@@ -53,11 +57,25 @@
           return;
         }
         //valida preço
-        this.incluirPedido();
+        this.alterarPedido();
       },
+
+      alterarPedido(){
+         let queryJson = this.montaJson();
+         let requisicao = this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedido}`, queryJson)
+          .then(() => {
+            window.location.href = `http://localhost:8080/pedido/${this.id}`;
+          })
+          .catch(error => {
+            if (error.status == 400) {
+              alert(error.body.message);
+            }
+        });
+      },
+
       incluirPedido() {
         let queryJson = this.montaJson();
-        let requisicao = this.$http.post('https://emissaopedido.herokuapp.com/pedidoItens', queryJson)
+        let requisicao = this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
           .then(() => {
             window.location.href = `http://localhost:8080/pedido/${this.idPedido}`;
           })
@@ -67,6 +85,7 @@
             }
         });
       },
+
       montaJson() {
         return `{
           "pedido": "pedido/${this.idPedido}", 
@@ -77,9 +96,19 @@
       }
     },
     created() {
-    let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
-      .then(res => res.json())
-      .then(data => this.produtos = data._embedded.produtos);
+      let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
+        .then(res => res.json())
+        .then(data => this.produtos = data._embedded.produtos);
+
+      if (this.idProduto){
+        this.name = this.idProduto;
+      }
+      if (this.precoProduto){
+        this.preco = this.precoProduto;
+      }
+      if (this.quantidadeProduto){
+        this.quantidade = this.quantidadeProduto;
+      }
     },
   };
 </script>

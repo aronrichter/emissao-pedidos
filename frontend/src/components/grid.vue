@@ -10,7 +10,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bordaTabela" v-for="item in itensPedido" @click="teste">
+        <tr class="bordaTabela" 
+            v-for="item in itensPedido" 
+            @click="incluirPedido(item.id, item.produto.id, item.precoUnitario, item.quantidade)">
           <td>{{ item.produto.nome }}</td>
           <td>R$ {{ item.precoUnitario }}</td>
           <td>{{ item.quantidade }}</td>
@@ -20,22 +22,46 @@
         </tr>
       </tbody>
     </table>
+    <modal v-show="isModalVisible" 
+           @close="closeModal" 
+           :idPedido="this.idPedidoItem"
+           :idProduto="this.idProdutoItem"
+           :precoProduto="this.precoProdutoItem"
+           :quantidadeProduto="this.quantidadeProdutoItem"
+           />
   </div>
 </template>
 
 <script>
+import modal from '../components/modal.vue';
+
 export default {
   props: {
       itensPedido: {}
     },
+    components: {
+    'modal': modal,
+  },
   data() {
     return {
+      isModalVisible: false,
+      idProdutoItem: null,
+      precoProdutoItem: null,
+      quantidadeProdutoItem: null,
+      idPedidoItem: null,
     }
   },
   methods: {
-    teste(){
-      console.log("teste");
-    }
+    incluirPedido(itemPedido, idProduto, preco, qtd) {
+      this.idPedidoItem = itemPedido;
+      this.idProdutoItem = idProduto;
+      this.precoProdutoItem = preco;
+      this.quantidadeProdutoItem = qtd;
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   }
 }
 </script>
