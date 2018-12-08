@@ -2,38 +2,37 @@
   <div class="modal-backdrop">
     <div class="modal">
       <p>Insira os dados dao pedido:</p><br>
-      <div class="field is-horizontal">
+      <div class="field is-horizontal configLinha1">
         <div class="field-label is-small">
           <label>Produto</label>
         </div>
         <div class="control ">
           <div class="select is-dark is-small">
-            <select v-model="name" name="name">
+            <select class="inputDados1" v-model="name" name="name">
               <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div class="field is-horizontal">
+      <div class="field is-horizontal configLinha2">
         <div class="field-label is-small">
           <label>Preço</label>
         </div>
-        <input class="input is-dark is-small" v-model="preco" type="number" placeholder="Preço R$" min=0>
+        <input class="inputDados2 input is-dark is-small" v-model="preco" type="number" placeholder="Preço R$" min=0>
       </div>
 
-      <div class="field is-horizontal">
+      <div class="field is-horizontal configLinha3">
         <div class="field-label is-small">
           <label>Quantidade</label>
         </div>
-        <input class="input is-dark is-small" v-model="quantidade" type="number" placeholder="Quantidade">
-        </div>
-        <br>
-        <div class="is-grouped">
-          <button class="button is-success is-danger is-small" @click="cancelar">Cancelar</button>
-          <button class="button is-success is-small" @click="confirmar">Confirmar</button>
-        </div>
-
+        <input class="inputDados3 input is-dark is-small" v-model="quantidade" type="number" placeholder="Quantidade">
+      </div>
+      <br>
+      <div class="is-grouped">
+        <button class="button is-success is-danger is-small" @click="cancelar">Cancelar</button>
+        <button class="button is-success is-small" @click="confirmar">Confirmar</button>
+      </div>
     </div>
   </div>
 </template>
@@ -66,7 +65,17 @@
           alert("Valor tem de ser maior que zero!");
           return;
         }
-        //validação numero
+        
+        if (!/^\d*(\.\d\d)*(\.\d)?$/.exec(this.preco)){
+          alert("Utilizar somente duas casa decimais!");
+          return
+        }
+
+        if (this.preco <= 0){
+          alert("Valor tem de ser maior que zero!");
+          return;
+        }
+
         if (this.idPedidoItem){
           this.alterarPedido();
         }else {
@@ -133,8 +142,36 @@
   .modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
-    margin: 250px 400px 250px 400px;
+    margin: 150px 200px 150px 200px;
     overflow-x: auto;
     display: flex;
   }
+
+  .configLinha1{
+    margin-left: 0px;
+  }
+
+  .configLinha2{
+    margin-left: 0px;
+  }
+
+  .configLinha3{
+    margin-left: -80px;
+  }
+
+  .inputDados1{
+    margin-left: 20px;  
+  }
+
+  .inputDados2{
+    margin-left: 35px;
+    width: 180px;
+  }
+
+  .inputDados3{
+    margin-left: 5px;  
+    width: 100px;
+  }
+
+  
 </style>
