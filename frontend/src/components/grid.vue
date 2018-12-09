@@ -15,6 +15,7 @@
       <tbody>
         <tr class="bordaTabela"
             v-for="item in itensPedido"
+            :key="item.id"
             @click="alterarPedido(item.id)">
           <td>{{ item.produto.nome }}</td>
           <td>R$ {{ item.precoUnitario }}</td>
@@ -66,7 +67,7 @@ export default {
       this.isModalVisible = false;
     },
     adicionarPedido() {
-      window.location.href = `https://emissaopedidofrontend.herokuapp.com/`;
+      window.location.href = `http://localhost:8080/`;
     }
   }
 }

@@ -35,10 +35,9 @@ export default {
     };
   },
   created() {
-    let promise = this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
+    this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
       .then(res => (res.json())
       .then(data => this.itensPedido = data));
-      console.log(this.itensPedido);
   },
 }
 </script>

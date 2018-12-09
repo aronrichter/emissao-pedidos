@@ -1,15 +1,15 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <p>Insira os dados dao pedido:</p><br>
+      <p>Insira os dados do pedido:</p><br>
       <div class="field is-horizontal configLinha1">
         <div class="field-label is-small">
           <label>Produto</label>
         </div>
-        <div class="control ">
+        <div class="control">
           <div class="select is-dark is-small">
             <select class="inputDados1" v-model="name" name="name">
-              <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+              <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)" :key="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
             </select>
           </div>
         </div>
@@ -31,7 +31,7 @@
       <br>
       <div class="is-grouped">
         <button class="button is-success is-danger is-small" @click="cancelar">Cancelar</button>
-        <button class="button is-success is-small" @click="confirmar">Confirmar</button>
+        <button class="separaBotao button is-success is-small" @click="confirmar">Confirmar</button>
       </div>
     </div>
   </div>
@@ -85,7 +85,7 @@
 
       alterarPedido(){
          let queryJson = this.montaJson();
-         let requisicao = this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedidoItem}`, queryJson)
+         this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedidoItem}`, queryJson)
           .then(() => {
             window.location.reload();
           })
@@ -98,9 +98,9 @@
 
       incluirPedido() {
         let queryJson = this.montaJson();
-        let requisicao = this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
+        this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
           .then(() => {
-            window.location.href = `https://emissaopedidofrontend.herokuapp.com/pedido/${this.idPedido}`;
+            window.location.href = `http://localhost:8080/pedido/${this.idPedido}`;
           })
           .catch(error => {
             if (error.status == 400) {
@@ -119,7 +119,7 @@
       }
     },
     created() {
-      let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
+      this.$http.get('https://emissaopedido.herokuapp.com/produtos')
         .then(res => res.json())
         .then(data => this.produtos = data._embedded.produtos);
     },
@@ -147,31 +147,33 @@
     display: flex;
   }
 
-  .configLinha1{
+  .configLinha1 {
     margin-left: 0px;
   }
 
-  .configLinha2{
+  .configLinha2 {
     margin-left: 0px;
   }
 
-  .configLinha3{
+  .configLinha3 {
     margin-left: -80px;
   }
 
-  .inputDados1{
+  .inputDados1 {
     margin-left: 20px;  
   }
 
-  .inputDados2{
+  .inputDados2 {
     margin-left: 35px;
     width: 180px;
   }
 
-  .inputDados3{
+  .inputDados3 {
     margin-left: 5px;  
     width: 100px;
   }
 
-  
+  .separaBotao {
+    margin-left: 5px;
+  }
 </style>
