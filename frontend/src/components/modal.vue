@@ -100,7 +100,7 @@
         let queryJson = this.montaJson();
         let requisicao = this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
           .then(() => {
-            window.location.href = `http://localhost:8080/pedido/${this.idPedido}`;
+            window.location.href = `https://emissaopedidofrontend.herokuapp.com/pedido/${this.idPedido}`;
           })
           .catch(error => {
             if (error.status == 400) {
