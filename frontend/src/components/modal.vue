@@ -19,14 +19,14 @@
         <div class="field-label is-small">
           <label>Preço</label>
         </div>
-        <input class="inputDados2 input is-dark is-small" v-model="preco" type="number" placeholder="Preço R$" min=0>
+        <input class="inputDados2 input is-dark is-small" v-model="preco" type="number" min=0>
       </div>
 
       <div class="field is-horizontal configLinha3">
         <div class="field-label is-small">
           <label>Quantidade</label>
         </div>
-        <input class="inputDados3 input is-dark is-small" v-model="quantidade" type="number" placeholder="Quantidade">
+        <input class="inputDados3 input is-dark is-small" v-model="quantidade" type="number">
       </div>
       <br>
       <div class="is-grouped">
@@ -54,7 +54,7 @@
     methods: {
       cancelar() {
         this.$emit('close');
-      },
+      },     
 
       confirmar() {
         if (!this.name) {

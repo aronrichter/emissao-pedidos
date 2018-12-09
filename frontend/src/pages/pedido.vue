@@ -1,9 +1,9 @@
 <template>
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
-
+    
     <div class="tamanhoPagina">
-      <p>Cliente</p>
+      <p>Número do Pedido: {{ this.itensPedido[0].pedido.id }}</p>
       <input class="input is-dark" v-model="this.itensPedido[0].pedido.cliente.nome" readonly>
     </div><br>
 
