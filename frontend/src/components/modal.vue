@@ -1,15 +1,15 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal">
-      <p>Insira os dados dao pedido:</p><br>
+      <p>Insira os dados do pedido:</p><br>
       <div class="field is-horizontal configLinha1">
         <div class="field-label is-small">
           <label>Produto</label>
         </div>
-        <div class="control ">
+        <div class="control">
           <div class="select is-dark is-small">
             <select @change="teste(name)" class="inputDados1" v-model="name" name="name">
-              <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+		<option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)" :key="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
             </select>
           </div>
         </div>
@@ -54,7 +54,6 @@
         preco: null,
         name: null,
         produtos: [],
-        precoSugerido: '',
       };
     },
     methods: {
@@ -95,7 +94,7 @@
 
       alterarPedido(){
          let queryJson = this.montaJson();
-         let requisicao = this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedidoItem}`, queryJson)
+         this.$http.patch(`https://emissaopedido.herokuapp.com/pedidoItens/${this.idPedidoItem}`, queryJson)
           .then(() => {
             window.location.reload();
           })
@@ -108,7 +107,7 @@
 
       incluirPedido() {
         let queryJson = this.montaJson();
-        let requisicao = this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
+        this.$http.post(`https://emissaopedido.herokuapp.com/pedidoItens`, queryJson)
           .then(() => {
             window.location.href = `https://emissaopedidofrontend.herokuapp.com/pedido/${this.idPedido}`;
           })
@@ -129,7 +128,7 @@
       }
     },
     created() {
-      let promise = this.$http.get('https://emissaopedido.herokuapp.com/produtos')
+      this.$http.get('https://emissaopedido.herokuapp.com/produtos')
         .then(res => res.json())
         .then(data => this.produtos = data._embedded.produtos);
     },

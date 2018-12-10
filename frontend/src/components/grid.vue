@@ -15,6 +15,7 @@
       <tbody>
         <tr class="bordaTabela"
             v-for="item in itensPedido"
+            :key="item.id"
             @click="alterarPedido(item.id)">
           <td>{{ item.produto.nome }}</td>
           <td>R$ {{ item.precoUnitario }}</td>

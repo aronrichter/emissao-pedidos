@@ -1,9 +1,9 @@
 <template>
   <div>
     <toolbar titulo="Emissão Pedidos"></toolbar><br>
-
+    
     <div class="tamanhoPagina">
-      <p>Cliente</p>
+      <p>Número do Pedido: {{ this.itensPedido[0].pedido.id }}</p>
       <input class="input is-dark" v-model="this.itensPedido[0].pedido.cliente.nome" readonly>
     </div><br>
 
@@ -35,10 +35,9 @@ export default {
     };
   },
   created() {
-    let promise = this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
+    this.$http.get(`https://emissaopedido.herokuapp.com/pedidosItem/pedidoId/${this.id}`)
       .then(res => (res.json())
       .then(data => this.itensPedido = data));
-      console.log(this.itensPedido);
   },
 }
 </script>
