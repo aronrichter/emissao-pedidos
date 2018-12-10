@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bordaTabela"
+        <tr class="bordaTabelaDados"
             v-for="item in itensPedido"
             :key="item.id"
             @click="alterarPedido(item.id)">
@@ -76,5 +76,12 @@ export default {
 <style>
   .bordaTabela{
     border: 1px solid #333;
+  }
+  .bordaTabelaDados{
+    border: 1px solid #333;
+  }
+  .bordaTabelaDados:hover{
+    border: 1px solid #333;
+    background-color: #c0c0c0c0;
   }
 </style>
