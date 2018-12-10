@@ -9,7 +9,7 @@
         <div class="control">
           <div class="select is-dark is-small">
             <select @change="teste(name)" class="inputDados1" v-model="name" name="name">
-		<option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)" :key="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
+		          <option v-for="value in this.produtos" :value="(value._links.self.href).slice(-1)" :key="(value._links.self.href).slice(-1)">{{ value.nome }}</option>
             </select>
           </div>
         </div>
