@@ -67,7 +67,7 @@ export default {
       this.isModalVisible = false;
     },
     adicionarPedido() {
-      window.location.href = `http://localhost:8080/`;
+      window.location.href = `https://emissaopedidofrontend.herokuapp.com/`;
     }
   }
 }
