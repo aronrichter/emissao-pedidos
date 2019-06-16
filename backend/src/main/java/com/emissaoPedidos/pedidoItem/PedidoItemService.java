@@ -21,17 +21,13 @@ public class PedidoItemService {
 
     public static Character verificaRentabilidade(Float precoOriginal, Float precoCompra) {
         char tipoRentabilidade;
+        
         if (precoCompra > precoOriginal)
-            tipoRentabilidade = 'O';
-        else{
-            if(calculaPercentual(precoOriginal, precoCompra) <= 10){
-                tipoRentabilidade = 'B';
-            }
-            else{
-                tipoRentabilidade = 'R';
-            }
-        }
-        return tipoRentabilidade;
+            return 'O';
+        if (calculaPercentual(precoOriginal, precoCompra) <= 10)
+           return 'B';
+        if (calculaPercentual(precoOriginal, precoCompra) > 10)   
+           return 'R';        
     }
     public static Integer calculaPercentual(Float precoOriginal, Float precoCompra) {
         return Math.round((1 - precoCompra / precoOriginal) * 100);
